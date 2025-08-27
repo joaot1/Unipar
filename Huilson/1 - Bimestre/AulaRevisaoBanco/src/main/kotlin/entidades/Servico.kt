@@ -1,4 +1,9 @@
 package org.example.entidades
 
-class Servico {
-}
+import java.math.BigDecimal
+
+class Servico (
+    val preco : BigDecimal,
+    val condicao : String,
+    val funcionario : Funcionario
+)
