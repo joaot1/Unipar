@@ -1,0 +1,97 @@
+/* Deixei comentado as coisas mais importantes. 
+Alguns comandos de CSS fui apreendendo de acordo com pesquisas que fiz para desenvolver o trabalho.*/
+
+
+body{
+  margin: 0; /*Vai deixar a margem 0 do site.*/
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+  background-color: rgb(100, 54, 144);  
+  color: white;
+}
+
+.container{
+  display: flex;  
+  flex-direction: column; /* Coloca o header, main e footer na verticalmente */
+  min-height: 100vh; /* Vai garantir que o site ocupe 100% da tela*/
+}
+
+/* Estilizando o Footer */
+
+.header{
+  background: linear-gradient(135deg, rgb(23, 7, 44), rgb(62, 34, 89)); /* Degradê de roxo escuro -> pra outro roxo */
+  color: white;
+  padding: 30px; /* espaçamento interno */
+  text-align: center;
+  border-radius: 20px;
+}
+
+.header h1{
+ font-size: 30x;
+  margin: 10px 0;
+}
+
+.header p {
+  font-size: 19px;
+  color: white
+}
+
+/* Arrumando o Card De Imagens e o main do app.jsx e Estilizando. */
+.main{
+  flex: 1; /* Faz o main ocupar o espaço que resta da tela.*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px; /* espaço entre os cards */
+  padding: 40px;
+}
+
+.card {
+  width: 260px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0,3s; 
+  /* Faz uma animação suave em cima do card. 
+  Foi uma maneira que achei para deixar mais bonitinho */
+}
+
+.card-imagem {
+  width: 100%;         /* ocupa toda a largura do card */
+  height: auto;        /* altura automática */
+  max-height: 350px;   /* limita a altura para não ficar gigante */
+  object-fit: contain; /* garante que a prancha inteira apareça */
+}
+
+.card-titulo{
+  font-size: 20px;
+  margin: 10px 0;
+  color: rgb(100, 54, 144);
+}
+
+.card-descricao{
+  font-size: 14px;
+  color: #444;
+}
+  
+/* Estilizando o Footer */
+
+.rodape {
+  background: rgb(70, 40, 110);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 30px;
+  border-radius: 20px;
+}
+
+.rodape h2{
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.rodape p {
+  font-size: 14px;
+  color: white
+}
