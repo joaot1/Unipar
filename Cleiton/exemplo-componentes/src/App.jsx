@@ -13,13 +13,13 @@ function App() {
     <div className='card'>
         <Header titulo="oi card 1"/>
         <Corpo corpinho="oi corpinho 1"/>
-        <Footer rodape="oi rodape 1"/>
+        <Footer valorFinal="oi rodape 1"/>
     </div>
 
     <div className='card'>
         <Header titulo="oi card 2"/>
         <Corpo corpinho="oi corpinho 2"/>
-        <Footer rodape="oi rodape 2"/>
+        <Footer valorFinal="oi rodape 2"/>
     </div>
     </>
   )

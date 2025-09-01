@@ -1,9 +1,11 @@
-function Footer({rodape}){
+function Footer(props){
     return(
         <footer>
-          <p>{rodape}</p>
+          <p>{props.valorFinal}</p>
         </footer>
     )
 }
 
 export default Footer;
+
+//Usamos quando tem um componente com 20 atributos dentro dele. exemplo.
