@@ -3,13 +3,14 @@ package org.example.crud
 import org.example.entidades.CaixaDAgua
 import org.example.enumeradoras.Material
 
+val conectar = EntidadeJDBC(
+    url = "jdbc:postgresql://localhost:5432/postgres",
+    usuario = "postgres",
+    senha = "5432",
+)
+
 fun criarTabelaCaixa(){
     // Precisamos puxar no main para funcionar
-    val conectar = EntidadeJDBC(
-        url = "jdbc:postgresql://localhost:5432/postgres",
-        usuario = "postgres",
-        senha = "5432",
-    )
     //Coloque o nome da tabela o mesmo nome da entidade.
     val sql = "CREATE TABLE IF NOT EXISTS CaixaDAgua" +
             " (id serial NOT NULL PRIMARY KEY," +
@@ -60,20 +61,33 @@ fun cadastrasCaixas(){
     println("Qual a profundidade da caixa:")
     val profundidade = readln().toDouble()
 
-    println("Qual a marca da caixa:")
-    val marca = readln().toString()
-
     /*Salvar as variáveis agora dentro da classe
     Conecte os atributo da classe a variáveil que o usuário digitou*/
-    
-    CaixaDAgua(
+
+
+    val c = CaixaDAgua(
         material = material,
         capacidade = capacidade,
         altura = altura,
         largura = largura,
-        profundida = profundidade,
-        marca = marca
+        profundidade = profundidade,
     )
+
+    val banco = conectar.conectarComBanco()!!.prepareStatement(
+        "INSERT INTO CaixaDAgua" +
+         " (material, capacidade, altura, largura, profundidade)" +
+         " VALUES (?, ?, ?, ?, ?)"
+    )
+        banco.setString(1, c.material.name)
+        banco.setDouble(2, c.capacidade!!)
+        banco.setDouble(3, c.altura)
+        banco.setDouble(4, c.largura)
+        banco.setDouble(5, c.profundidade)
+
+
+        banco.executeUpdate()//Isso fará um COMMIT no banco.
+
+        banco.close()//Fecha a transição
 }
 
 fun editarCaixas(){
