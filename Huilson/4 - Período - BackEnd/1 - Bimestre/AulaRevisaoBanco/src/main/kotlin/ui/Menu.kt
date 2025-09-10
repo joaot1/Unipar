@@ -21,7 +21,7 @@ fun menu(){
         // When é utilizado para realizar as operação das opçoes do menu.
         when (opcao) {
             0 -> println("Adeus amigo!")
-            1 -> cadastrasCaixas()
+            1 -> cadastrasCaixas(0) //Sempre que for cadastrar uma caixa nova o ID será 0
             2 -> editarCaixas()
             3 -> listarCaixas()
             4 -> excluirCaixas()

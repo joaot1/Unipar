@@ -32,7 +32,7 @@ fun criarTabelaCaixa(){
     banco.close() //Encerra a conexão com o banco.
 }
 
-fun cadastrasCaixas(){
+fun cadastrasCaixas(id : Int){
 
     println("Escolha o material do qual a caixa é composta:")
     println("1 - Plástico")
@@ -74,24 +74,51 @@ fun cadastrasCaixas(){
         profundidade = profundidade,
     )
 
-    val banco = conectar.conectarComBanco()!!.prepareStatement(
-        "INSERT INTO CaixaDAgua" +
-         " (material, capacidade, altura, largura, profundidade)" +
-         " VALUES (?, ?, ?, ?, ?)"
-    )
-        banco.setString(1, c.material.name)
-        banco.setDouble(2, c.capacidade!!)
-        banco.setDouble(3, c.altura)
-        banco.setDouble(4, c.largura)
-        banco.setDouble(5, c.profundidade)
+    val banco = conectar.conectarComBanco()!!
+    if(id == 0){
+        val salvar = banco.prepareStatement(
+            "INSERT INTO CaixaDAgua" +
+                    " (material, capacidade, altura, largura, profundidade)" +
+                    " VALUES (?, ?, ?, ?, ?)"
+        )
+        salvar.setString(1, c.material.name)
+        salvar.setDouble(2, c.capacidade!!)
+        salvar.setDouble(3, c.altura)
+        salvar.setDouble(4, c.largura)
+        salvar.setDouble(5, c.profundidade)
+        salvar.executeUpdate()//Isso fará um COMMIT no banco.
+    }else{
 
+    }
 
-        banco.executeUpdate()//Isso fará um COMMIT no banco.
-
-        banco.close()//Fecha a transição
+    banco.close()//Fecha a transição
 }
 
 fun editarCaixas(){
+    println("Digite o ID que deseja editar")
+    var id = readln().toInt()
+
+
+    val banco = conectar.conectarComBanco()
+    val sqlBusca = "SELECT * FROM caixadagua WHERE id = ?"
+    val resultados = banco!!.prepareStatement(sqlBusca)
+    resultados.setInt(1, id)
+    val retorno = resultados.executeQuery()
+
+
+    while (retorno.next()){
+        println("-----------------------------------")
+        println("ID: ${retorno.getString("id")}")
+        println("Material: ${retorno.getString("material")}")
+        println("Capacidade: ${retorno.getString("capacidade")}")
+        println("Altura: ${retorno.getString("altura")}")
+        println("Largura: ${retorno.getString("largura")}")
+        println("Profundidade: ${retorno.getString("profundidade")}")
+    }
+
+    println("Faça suas alterações: ")
+
+
 
 }
 
