@@ -88,7 +88,21 @@ fun cadastrasCaixas(id : Int){
         salvar.setDouble(5, c.profundidade)
         salvar.executeUpdate()//Isso fará um COMMIT no banco.
     }else{
-
+        val sql = "UPDATE caixadagua SET " +
+                    " material = ?," +
+                    " capacidade = ?," +
+                    " altura = ?," +
+                    " largura = ?," +
+                    " profundidade = ?" +
+                    " WHERE id = ?"
+        val editar = banco.prepareStatement(sql)
+        editar.setInt(6, id)
+        editar.setString(1, c.material.name)
+        editar.setDouble(2, c.capacidade!!)
+        editar.setDouble(3, c.altura)
+        editar.setDouble(4, c.largura)
+        editar.setDouble(5, c.profundidade)
+        editar.executeUpdate()//Isso fará um COMMIT no banco.
     }
 
     banco.close()//Fecha a transição
@@ -109,7 +123,7 @@ fun editarCaixas(){
     while (retorno.next()){
         println("-----------------------------------")
         println("ID: ${retorno.getString("id")}")
-        id = retorno.getString(id).toInt()
+        id = retorno.getString(id).toInt() //O Id da caixa que será editado.
 
         println("Material: ${retorno.getString("material")}")
         println("Capacidade: ${retorno.getString("capacidade")}")
@@ -120,8 +134,7 @@ fun editarCaixas(){
 
     println("Faça suas alterações: ")
     cadastrasCaixas(id)
-
-
+    banco.close()
 }
 
 fun listarCaixas(){
@@ -146,6 +159,7 @@ fun listarCaixas(){
         println("Largura: ${resultados.getString("largura")}")
         println("Profundidade: ${resultados.getString("profundidade")}")
     }
+    banco.close()
 }
 
 fun excluirCaixas(){
@@ -180,4 +194,5 @@ fun excluirCaixas(){
             println("Operação cancelada.")
         }
     }
+    banco.close()
 }
