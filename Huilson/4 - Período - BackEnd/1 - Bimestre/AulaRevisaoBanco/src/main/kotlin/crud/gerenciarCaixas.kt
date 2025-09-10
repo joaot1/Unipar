@@ -109,6 +109,8 @@ fun editarCaixas(){
     while (retorno.next()){
         println("-----------------------------------")
         println("ID: ${retorno.getString("id")}")
+        id = retorno.getString(id).toInt()
+
         println("Material: ${retorno.getString("material")}")
         println("Capacidade: ${retorno.getString("capacidade")}")
         println("Altura: ${retorno.getString("altura")}")
@@ -117,7 +119,7 @@ fun editarCaixas(){
     }
 
     println("Faça suas alterações: ")
-
+    cadastrasCaixas(id)
 
 
 }
