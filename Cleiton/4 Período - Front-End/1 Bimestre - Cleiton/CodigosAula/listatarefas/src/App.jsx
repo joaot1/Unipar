@@ -1,9 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
   const [tarefa, setTarefa] = useState("");
   const [listaTarefas, setListaTarefas] = useState([])
+
+  useEffect(() =>{
+    setListaTarefas(JSON.parse (
+      localStorage.getItem("LISTA_TAREFA"))
+    )
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem("LISTA_TAREFA", JSON.stringify(listaTarefas))
+  }, [listaTarefas])
 
   //Transforma em uma função.
   const adicionarTarefa = () => {
@@ -20,6 +30,7 @@ function App() {
       }
 
     setListaTarefas([...listaTarefas, novaTarefa])
+    localStorage.setItem("LISTA_TAREFA", JSON.stringify(listaTarefas))
 
     alert("Adicionado com sucesso");
     setTarefa("");
@@ -28,6 +39,7 @@ function App() {
   const excluirTarefa = (id) => {
 
     setListaTarefas(listaTarefas.filter( (task) => task.id != id))
+    localStorage.setItem("LISTA_TAREFA", JSON.stringify(listaTarefas))
 
   }
 
@@ -38,11 +50,17 @@ function App() {
         task.id == id ? {...task, completada:!task.completada} : task
       ))
     )
+
+    localStorage.setItem("LISTA_TAREFA", JSON.stringify(listaTarefas))
   }
 
   return (
     <div className="todo-container">
       <h2>Lista de Tarefas ✅</h2>
+
+      <p>Total tarefa : { listaTarefas.length || "Sem tarefas" }</p>
+
+
       <div className="input-container">
         <input
           type="text"
@@ -64,7 +82,7 @@ function App() {
             {task.nome}
             <div>
               <button onClick={()=> alterarSituacao(task.id)} className="complete-btn">✔</button>
-              <button onClick={() => excluirTarefa(task.id)}  className="delete-btn">❌</button>
+              <button disabled={task.completada} onClick={() => excluirTarefa(task.id)}  className="delete-btn">❌</button>
             </div>
           </li>
         ))}
