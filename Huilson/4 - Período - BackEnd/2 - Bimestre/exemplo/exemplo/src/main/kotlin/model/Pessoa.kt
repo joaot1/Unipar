@@ -10,7 +10,7 @@ data class Pessoa(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     val id: Long? = null,
-    val nome: String? = null,
-    val idade: Int? = null,
-    val cpf: String? = null
+    val nome: String,
+    val idade: Int,
+    val cpf: String
 )
