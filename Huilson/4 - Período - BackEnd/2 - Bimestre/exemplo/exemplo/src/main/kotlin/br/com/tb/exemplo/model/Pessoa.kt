@@ -1,4 +1,4 @@
-package model
+package br.com.tb.exemplo.model
 
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -10,7 +10,7 @@ data class Pessoa(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     val id: Long? = null,
-    val nome: String,
-    val idade: Int,
-    val cpf: String
+    val nome: String = "",
+    val idade: Int = 0,
+    val cpf: String = ""
 )
